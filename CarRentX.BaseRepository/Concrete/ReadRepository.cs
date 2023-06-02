@@ -36,12 +36,10 @@ namespace CarRentX.BaseRepository.Concrete
 
 		Task<IQueryable<TEntity>> IReadRepository<TEntity, T>.GetAll(bool tracking)
 		{
+			//kaldırılacaktır.
 			throw new NotImplementedException();
 		}
 
-		//Task<IQueryable<TEntity>> IReadRepository<TEntity, T>.GetAll(bool tracking)
-		//{
-		//	kaldırılacaktır.
-		//}
+		
 	}
 }

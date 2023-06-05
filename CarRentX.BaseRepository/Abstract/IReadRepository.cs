@@ -12,6 +12,5 @@ namespace CarRentX.BaseRepository.Abstract
 		// Geri dönen IQueryable<TEntity> sonucu, sorgulamaların yapılabileceği ve sonuçların kullanılabileceği bir sorgu nesnesidir.
 		Task<IQueryable<TEntity>> GetAll(bool tracking = false);
 		Task<TEntity> GetByIdAsync(T id,bool tracking=false);
-	
 	}
 }

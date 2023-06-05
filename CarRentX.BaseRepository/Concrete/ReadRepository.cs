@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace CarRentX.BaseRepository.Concrete
 {
-	public class ReadRepository<TEntity, TContext, T> : IReadRepository<TEntity, T>, IRepository<TEntity, T> where TEntity:BaseEntity<T> where TContext : DbContext
+	public class ReadRepository<TEntity, TContext, T> : IReadRepository<TEntity, T>, IRepository<TEntity, T> 
+		where TEntity:BaseEntity<T> 
+		where TContext : DbContext
 	{
 		protected  TContext _context { get; }
 		public ReadRepository(TContext context)
@@ -18,11 +20,11 @@ namespace CarRentX.BaseRepository.Concrete
 		}
 		public DbSet<TEntity> Table => _context.Set<TEntity>();
 
-		public IQueryable<TEntity> GetAll(bool tracking = false)
+		public async Task<IQueryable<TEntity>> GetAll(bool tracking = false)
 		{
 			var query = Table.AsQueryable();
-			if(!tracking)
-				query=query.AsNoTracking();
+			if (!tracking)
+				query = query.AsNoTracking();
 			return query;
 		}
 
@@ -33,13 +35,5 @@ namespace CarRentX.BaseRepository.Concrete
 				query = Table.AsNoTracking();
 			return await query.FirstOrDefaultAsync(data => data.Id.Equals(id));
 		}
-
-		Task<IQueryable<TEntity>> IReadRepository<TEntity, T>.GetAll(bool tracking)
-		{
-			//kaldırılacaktır.
-			throw new NotImplementedException();
-		}
-
-		
 	}
 }

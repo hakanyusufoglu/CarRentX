@@ -10,7 +10,7 @@ namespace CarRentX.BaseRepository.Abstract
 		// Eğer tracking = false olarak ayarlanırsa, varlık nesnelerinin değişiklikleri izlenmez ve takip edilmez.
 		// Bu metod genellikle veritabanından varlık nesnelerini okuma işlemleri için kullanılır.
 		// Geri dönen IQueryable<TEntity> sonucu, sorgulamaların yapılabileceği ve sonuçların kullanılabileceği bir sorgu nesnesidir.
-		Task<IQueryable<TEntity>> GetAll(bool tracking = false);
+		IQueryable<TEntity> GetAll(bool tracking = false);
 		Task<TEntity> GetByIdAsync(T id,bool tracking=false);
 	}
 }

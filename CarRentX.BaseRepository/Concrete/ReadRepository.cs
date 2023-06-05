@@ -1,11 +1,6 @@
 ﻿using CarRentX.BaseEntity;
 using CarRentX.BaseRepository.Abstract;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarRentX.BaseRepository.Concrete
 {
@@ -20,7 +15,7 @@ namespace CarRentX.BaseRepository.Concrete
 		}
 		public DbSet<TEntity> Table => _context.Set<TEntity>();
 
-		public async Task<IQueryable<TEntity>> GetAll(bool tracking = false)
+		public IQueryable<TEntity> GetAll(bool tracking = false)
 		{
 			var query = Table.AsQueryable();
 			if (!tracking)

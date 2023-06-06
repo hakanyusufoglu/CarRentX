@@ -49,5 +49,7 @@ namespace CarRentX.BaseRepository.Concrete
 			}
 			return false;
 		}
+		public async Task<int> SaveAsync()=>await _context.SaveChangesAsync();
+		public int Save() => _context.SaveChanges();
 	}
 }

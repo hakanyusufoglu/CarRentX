@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarRentX.BaseEntity;
 
 namespace CarRentX.Entity
 {
-	public class Car
+	public class Car:BaseEntity<int>
 	{
-		public int Id { get; set; }
 		public int BrandId { get; set; }
 		public string ColorId { get; set; }
 		public DateTime ModelYear { get; set; }

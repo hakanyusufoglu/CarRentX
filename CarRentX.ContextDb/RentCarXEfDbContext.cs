@@ -1,4 +1,4 @@
-﻿using CarRentX.Entity;
+﻿using CarRentX.Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentX.ContextDb

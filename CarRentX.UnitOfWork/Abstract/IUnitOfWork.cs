@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarRentX.Repository.Abstact;
 
 namespace CarRentX.UnitOfWork.Abstract
 {
-	public interface IUnitOfWork:IDisposable
+	public interface IUnitOfWork : IDisposable
 	{
-		Task<int> SaveAsync();
-		int Save();
+		ICarReadRepository CarReadRepository { get; }
+		ICarWriteRepository CarWriteRepository { get; }
+		Task<int> CommitAsync();
+		int Commit();
 	}
 }

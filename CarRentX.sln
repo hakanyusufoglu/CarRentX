@@ -13,15 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E423671B-5FD1-49DC-A7DD-69D79ECC86E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Entity", "CarRentX.Entity\CarRentX.Entity.csproj", "{CE88CF9C-1CB0-4BAA-8CF5-B6E6D9553AF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Entity", "CarRentX.Entity\CarRentX.Entity.csproj", "{CE88CF9C-1CB0-4BAA-8CF5-B6E6D9553AF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Repository", "CarRentX.Repository\CarRentX.Repository.csproj", "{DCD73DB7-C9D7-41BC-BCF5-6EA1B034E196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Repository", "CarRentX.Repository\CarRentX.Repository.csproj", "{DCD73DB7-C9D7-41BC-BCF5-6EA1B034E196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.ContextDb", "CarRentX.ContextDb\CarRentX.ContextDb.csproj", "{53DC707F-5E0F-436D-B7DF-1C526C69C8AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.ContextDb", "CarRentX.ContextDb\CarRentX.ContextDb.csproj", "{53DC707F-5E0F-436D-B7DF-1C526C69C8AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.BaseRepository", "CarRentX.BaseRepository\CarRentX.BaseRepository.csproj", "{6AFD51F8-E6DE-40F0-A39D-657674AD5F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.BaseRepository", "CarRentX.BaseRepository\CarRentX.BaseRepository.csproj", "{6AFD51F8-E6DE-40F0-A39D-657674AD5F40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.BaseEntity", "CarRentX.BaseEntity\CarRentX.BaseEntity.csproj", "{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.BaseEntity", "CarRentX.BaseEntity\CarRentX.BaseEntity.csproj", "{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.UnitOfWork", "CarRentX.UnitOfWork\CarRentX.UnitOfWork.csproj", "{91199FCE-6BC8-424C-8671-F332192D384E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91199FCE-6BC8-424C-8671-F332192D384E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91199FCE-6BC8-424C-8671-F332192D384E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91199FCE-6BC8-424C-8671-F332192D384E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91199FCE-6BC8-424C-8671-F332192D384E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{53DC707F-5E0F-436D-B7DF-1C526C69C8AE} = {DCE185EE-BD2D-48BA-90B6-B18A61349073}
 		{6AFD51F8-E6DE-40F0-A39D-657674AD5F40} = {A93834B0-8FD5-4677-BD3B-B2AEAB60CA40}
 		{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF} = {A93834B0-8FD5-4677-BD3B-B2AEAB60CA40}
+		{91199FCE-6BC8-424C-8671-F332192D384E} = {A93834B0-8FD5-4677-BD3B-B2AEAB60CA40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {91D43D81-831B-4B10-B90B-B7FED1FDE858}

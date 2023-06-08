@@ -10,6 +10,7 @@
     <ProjectReference Include="..\CarRentX.BaseRepository\CarRentX.BaseRepository.csproj" />
     <ProjectReference Include="..\CarRentX.ContextDb\CarRentX.ContextDb.csproj" />
     <ProjectReference Include="..\CarRentX.Entity\CarRentX.Entity.csproj" />
+    <ProjectReference Include="..\CarRentX.UnitOfWork\CarRentX.UnitOfWork.csproj" />
   </ItemGroup>
 
 </Project>

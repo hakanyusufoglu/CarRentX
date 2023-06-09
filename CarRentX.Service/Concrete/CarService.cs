@@ -3,6 +3,7 @@ using CarRentX.Entity.Concrete;
 using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
 using CarRentX.UnitOfWork.Abstract;
+using Microsoft.Extensions.Configuration;
 
 namespace CarRentX.Service.Concrete
 {
@@ -10,18 +11,20 @@ namespace CarRentX.Service.Concrete
 	public class CarService : ICarService
 	{
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IConfiguration _config;
 		private readonly IMapping _mapper;
-		public CarService(IUnitOfWork carUnitOfWork, IMapping mapper)
+		public CarService(IUnitOfWork carUnitOfWork, IMapping mapper, IConfiguration config)
 		{
 			_unitOfWork = carUnitOfWork;
 			_mapper = mapper;
+			_config = config;
 		}
 		public async Task<int> AddAsync(CarDto carDto)
 		{
 			_unitOfWork.BeginTransaction();
 			if (carDto == null)
 			{
-				throw new ArgumentNullException(nameof(carDto), "CarDto parametresi boş olamaz.");
+				throw new ArgumentNullException(nameof(carDto), _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty);
 			}
 			try
 			{
@@ -34,14 +37,15 @@ namespace CarRentX.Service.Concrete
 				// ArgumentNullException özel olarak yakalandı
 				// İşlem yapılacak kod buraya gelebilir
 				// Örneğin, hata mesajını günlüğe kaydedebilir veya uygun bir şekilde işleyebilirsiniz
-				throw new InvalidOperationException("arDto parametresi boş olamaz.", ex);
+				throw new InvalidOperationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty, ex);
 			}
 			catch (Exception ex)
 			{
+				_unitOfWork.Rollback();
 				// Diğer tüm istisnalar burada yakalanır
 				// İşlem yapılacak kod buraya gelebilir
 				// Örneğin, hatayı günlüğe kaydedebilir veya uygun bir şekilde işleyebilirsiniz
-				throw new ApplicationException("Araba eklenirken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty, ex);
 			}
 		}
 		public IEnumerable<CarDto> GetAll()
@@ -55,7 +59,7 @@ namespace CarRentX.Service.Concrete
 			catch (Exception ex)
 			{
 				_unitOfWork.Rollback();
-				throw new ApplicationException("Arabalar alınırken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Error").Value ?? string.Empty, ex);
 			}
 		}
 		public async Task<CarDto> GetByIdAsync(int id)
@@ -69,7 +73,7 @@ namespace CarRentX.Service.Concrete
 			catch (Exception ex)
 			{
 				_unitOfWork.Rollback();
-				throw new ApplicationException("Araba alınırken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Get").GetSection("Warning").Value ?? string.Empty, ex);
 			}
 		}
 		public bool Remove(CarDto carDto)
@@ -83,7 +87,7 @@ namespace CarRentX.Service.Concrete
 			catch (Exception ex)
 			{
 				_unitOfWork.Rollback();
-				throw new ApplicationException("Araba silinirken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Error").Value ?? string.Empty, ex);
 			}
 		}
 		public async Task<bool> RemoveAsync(int id)
@@ -96,7 +100,7 @@ namespace CarRentX.Service.Concrete
 			catch (Exception ex)
 			{
 				await _unitOfWork.RollbackAsync();
-				throw new ApplicationException("Araba silinirken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Error").Value ?? string.Empty, ex);
 			}
 		}
 		public bool Update(CarDto carDto)
@@ -110,7 +114,7 @@ namespace CarRentX.Service.Concrete
 			catch (Exception ex)
 			{
 				_unitOfWork.Rollback();
-				throw new ApplicationException("Araba güncellenirken bir hata oluştu.", ex);
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Update").GetSection("Warning").Value ?? string.Empty, ex);
 			}
 		}
 

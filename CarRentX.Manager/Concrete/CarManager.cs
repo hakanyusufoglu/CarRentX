@@ -69,7 +69,6 @@ namespace CarRentX.Manager.Concrete
 				return BaseResponse<IEnumerable<CarViewModel>>.Error(errorMessage);
 			}
 		}
-
 		public async Task<BaseResponse<CarViewModel>> GetByIdAsync(int id)
 		{
 			try
@@ -121,7 +120,6 @@ namespace CarRentX.Manager.Concrete
 				return BaseResponse<bool>.Error(errorMessage);
 			}
 		}
-
 		public async Task<BaseResponse<bool>> RemoveAsync(int id)
 		{
 			try
@@ -147,7 +145,6 @@ namespace CarRentX.Manager.Concrete
 				return BaseResponse<bool>.Error(errorMessage);
 			}
 		}
-
 		public BaseResponse<bool> Update(CarViewModel carViewModel)
 		{
 			try

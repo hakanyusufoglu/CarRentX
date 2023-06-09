@@ -4,9 +4,14 @@ namespace CarRentX.UnitOfWork.Abstract
 {
 	public interface IUnitOfWork : IDisposable
 	{
+		
 		ICarReadRepository CarReadRepository { get; }
 		ICarWriteRepository CarWriteRepository { get; }
 		Task<int> CommitAsync();
 		int Commit();
+		void BeginTransaction();
+		void Rollback();
+		Task BeginTransactionAsync();
+		Task RollbackAsync();
 	}
 }

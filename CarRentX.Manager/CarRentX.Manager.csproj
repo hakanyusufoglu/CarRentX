@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarRentX.Service\CarRentX.Service.csproj" />
     <ProjectReference Include="..\CarRentX.Utility\CarRentX.Utility.csproj" />
     <ProjectReference Include="..\CarRentX.ViewModel\CarRentX.ViewModel.csproj" />

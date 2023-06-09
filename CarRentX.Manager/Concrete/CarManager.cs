@@ -4,18 +4,21 @@ using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
 using CarRentX.Utility.BaseResponse;
 using CarRentX.ViewModel.Car;
+using Microsoft.Extensions.Configuration;
 
 namespace CarRentX.Manager.Concrete
 {
 	public class CarManager : ICarManager
 	{
 		private readonly ICarService _carService;
+		private readonly IConfiguration _config;
 		private readonly IMapping _mapper;
 
-		public CarManager(ICarService carService, IMapping mapper)
+		public CarManager(ICarService carService, IMapping mapper, IConfiguration config)
 		{
 			_carService = carService;
 			_mapper = mapper;
+			_config = config;
 		}
 		public async Task<BaseResponse<int>> AddAsync(CarViewModel carViewModel)
 		{
@@ -25,9 +28,9 @@ namespace CarRentX.Manager.Concrete
 				var result = await _carService.AddAsync(carDto);
 				if (result <= 0)
 				{
-					return BaseResponse<int>.Error("Result is not greater than zero.");
+					return BaseResponse<int>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value??string.Empty);
 				}
-				return BaseResponse<int>.Success(carDto.Id, "test1");
+				return BaseResponse<int>.Success(carDto.Id, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{
@@ -51,9 +54,9 @@ namespace CarRentX.Manager.Concrete
 				var result = _mapper.Map<IEnumerable<CarDto>, IEnumerable<CarViewModel>>(_carService.GetAll());
 				if (!result.Any())
 				{
-					return BaseResponse<IEnumerable<CarViewModel>>.Error("Result is not greater than zero.");
+					return BaseResponse<IEnumerable<CarViewModel>>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Error").Value ?? string.Empty);
 				}
-				return BaseResponse<IEnumerable<CarViewModel>>.Success(result, "Araçlar getirildi.");
+				return BaseResponse<IEnumerable<CarViewModel>>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{
@@ -76,9 +79,9 @@ namespace CarRentX.Manager.Concrete
 				var result = _mapper.Map<CarDto, CarViewModel>(await _carService.GetByIdAsync(id));
 				if (result == null)
 				{
-					return BaseResponse<CarViewModel>.Error("Araç getirilemedi.");
+					return BaseResponse<CarViewModel>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Get").GetSection("Warning").Value ?? string.Empty);
 				}
-				return BaseResponse<CarViewModel>.Success(result, "Araç getirildi.");
+				return BaseResponse<CarViewModel>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Get").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{
@@ -102,9 +105,9 @@ namespace CarRentX.Manager.Concrete
 				var result = _carService.Remove(carDto);
 				if (!result)
 				{
-					return BaseResponse<bool>.Error("Araç silinemedi.");
+					return BaseResponse<bool>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Error").Value ?? string.Empty);
 				}
-				return BaseResponse<bool>.Success(result, "Araç silindi.");
+				return BaseResponse<bool>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{
@@ -127,9 +130,9 @@ namespace CarRentX.Manager.Concrete
 				var result = await _carService.RemoveAsync(id);
 				if (!result)
 				{
-					return BaseResponse<bool>.Error("Araç silinemedi.");
+					return BaseResponse<bool>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Error").Value ?? string.Empty);
 				}
-				return BaseResponse<bool>.Success(result, "Araç silindi.");
+				return BaseResponse<bool>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Delete").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{
@@ -153,9 +156,9 @@ namespace CarRentX.Manager.Concrete
 				var result = _carService.Update(carDto);
 				if (!result)
 				{
-					return BaseResponse<bool>.Error("Araç güncüllenemedi.");
+					return BaseResponse<bool>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Update").GetSection("Warning").Value ?? string.Empty);
 				}
-				return BaseResponse<bool>.Success(result, "Araç güncellendi.");
+				return BaseResponse<bool>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Update").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{

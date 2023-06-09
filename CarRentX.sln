@@ -23,17 +23,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.BaseRepository", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.BaseEntity", "CarRentX.BaseEntity\CarRentX.BaseEntity.csproj", "{E9C3E9C0-FE66-4D60-A0D3-BAAE7EE86EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Service", "CarRentX.Service\CarRentX.Service.csproj", "{AF7EACF9-81D3-41FB-8F37-DCA04D214011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Service", "CarRentX.Service\CarRentX.Service.csproj", "{AF7EACF9-81D3-41FB-8F37-DCA04D214011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Manager", "CarRentX.Manager\CarRentX.Manager.csproj", "{6E359C5F-6AB1-4DBB-BB2A-E52B689275CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Manager", "CarRentX.Manager\CarRentX.Manager.csproj", "{6E359C5F-6AB1-4DBB-BB2A-E52B689275CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Utility", "CarRentX.Utility\CarRentX.Utility.csproj", "{2111FEBA-4679-4225-AE2D-16887D4FE835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Utility", "CarRentX.Utility\CarRentX.Utility.csproj", "{2111FEBA-4679-4225-AE2D-16887D4FE835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.DTO", "CarRentX.DTO\CarRentX.DTO.csproj", "{9B6B000C-E04B-4584-8E9C-3EFF8D96184B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.DTO", "CarRentX.DTO\CarRentX.DTO.csproj", "{9B6B000C-E04B-4584-8E9C-3EFF8D96184B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.Mapping", "CarRentX.Mapping\CarRentX.Mapping.csproj", "{628078FD-0CC5-4C96-AFA2-9E371CEA126F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.Mapping", "CarRentX.Mapping\CarRentX.Mapping.csproj", "{628078FD-0CC5-4C96-AFA2-9E371CEA126F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.UnitOfWork", "CarRentX.UnitOfWork\CarRentX.UnitOfWork.csproj", "{439A2030-A633-420D-BAE9-40325B7D2AA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentX.UnitOfWork", "CarRentX.UnitOfWork\CarRentX.UnitOfWork.csproj", "{439A2030-A633-420D-BAE9-40325B7D2AA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{6AF3E613-18F1-4CC6-8EC0-C49DA2604E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentX.ViewModel", "CarRentX.ViewModel\CarRentX.ViewModel.csproj", "{30B6C7FD-226F-4F74-A442-62D4822059D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +89,10 @@ Global
 		{439A2030-A633-420D-BAE9-40325B7D2AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{439A2030-A633-420D-BAE9-40325B7D2AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{439A2030-A633-420D-BAE9-40325B7D2AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B6C7FD-226F-4F74-A442-62D4822059D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B6C7FD-226F-4F74-A442-62D4822059D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B6C7FD-226F-4F74-A442-62D4822059D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B6C7FD-226F-4F74-A442-62D4822059D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +109,7 @@ Global
 		{9B6B000C-E04B-4584-8E9C-3EFF8D96184B} = {BD59C30D-79EB-4ED5-9300-4D44670219B4}
 		{628078FD-0CC5-4C96-AFA2-9E371CEA126F} = {A93834B0-8FD5-4677-BD3B-B2AEAB60CA40}
 		{439A2030-A633-420D-BAE9-40325B7D2AA6} = {DCE185EE-BD2D-48BA-90B6-B18A61349073}
+		{30B6C7FD-226F-4F74-A442-62D4822059D5} = {6AF3E613-18F1-4CC6-8EC0-C49DA2604E84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {91D43D81-831B-4B10-B90B-B7FED1FDE858}

@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarRentX.Service\CarRentX.Service.csproj" />
+    <ProjectReference Include="..\CarRentX.Utility\CarRentX.Utility.csproj" />
+    <ProjectReference Include="..\CarRentX.ViewModel\CarRentX.ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

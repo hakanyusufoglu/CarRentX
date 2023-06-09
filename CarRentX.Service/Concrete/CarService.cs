@@ -1,78 +1,112 @@
 ﻿using CarRentX.DTO.Car;
 using CarRentX.Entity.Concrete;
 using CarRentX.Mapping.Abstract;
-using CarRentX.Repository.Abstact;
 using CarRentX.Service.Abstract;
 using CarRentX.UnitOfWork.Abstract;
-using CarRentX.Utility.BaseResponse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarRentX.Service.Concrete
 {
+	//ToDo statik mesajlar appsettings.json dosyasına taşınacaktır.
 	public class CarService : ICarService
 	{
-		private readonly IUnitOfWork _carUnitOfWork;
+		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMapping _mapper;
 		public CarService(IUnitOfWork carUnitOfWork, IMapping mapper)
 		{
-			_carUnitOfWork = carUnitOfWork;
+			_unitOfWork = carUnitOfWork;
 			_mapper = mapper;
 		}
 
 		public async Task<int> AddAsync(CarDto carDto)
 		{
+			if (carDto == null)
+			{
+				throw new ArgumentNullException(nameof(carDto), "CarDto parametresi boş olamaz.");
+			}
 			try
 			{
-				if (carDto == null)
-					throw new ArgumentNullException(nameof(carDto));
-
-				await _carUnitOfWork.CarWriteRepository.AddAsync(_mapper.Map<CarDto, Car>(carDto));
-				return await _carUnitOfWork.CommitAsync();
+				await _unitOfWork.CarWriteRepository.AddAsync(_mapper.Map<CarDto, Car>(carDto));
+				return await _unitOfWork.CommitAsync();
 			}
 			catch (ArgumentNullException ex)
 			{
 				// ArgumentNullException özel olarak yakalandı
 				// İşlem yapılacak kod buraya gelebilir
 				// Örneğin, hata mesajını günlüğe kaydedebilir veya uygun bir şekilde işleyebilirsiniz
-				throw new InvalidOperationException("CarDto parameter cannot be null.", ex);
+				throw new InvalidOperationException("arDto parametresi boş olamaz.", ex);
 			}
 			catch (Exception ex)
 			{
 				// Diğer tüm istisnalar burada yakalanır
 				// İşlem yapılacak kod buraya gelebilir
 				// Örneğin, hatayı günlüğe kaydedebilir veya uygun bir şekilde işleyebilirsiniz
-				throw new ApplicationException("An error occurred while adding the car.", ex);
+				throw new ApplicationException("Araba eklenirken bir hata oluştu.", ex);
+			}
+		}
+		public IEnumerable<CarDto> GetAll()
+		{
+			try
+			{
+				var result = _unitOfWork.CarReadRepository.GetAll();
+				return _mapper.Map<IEnumerable<Car>, IEnumerable<CarDto>>(result);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("Arabalar alınırken bir hata oluştu.", ex);
 			}
 		}
 
-
-		public Task<IEnumerable<CarDto>> GetAllAsync()
+		public async Task<CarDto> GetByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var result =await _unitOfWork.CarReadRepository.GetByIdAsync(id);
+				return _mapper.Map<Car, CarDto>(result);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("Araba alınırken bir hata oluştu.", ex);
+			}
 		}
-
-		public Task<CarDto> GetByIdAsync(int id)
-		{
-			throw new NotImplementedException();
-		}
-
 		public bool Remove(CarDto carDto)
 		{
-			throw new NotImplementedException();
-		}
+			try
+			{
+				var result = _mapper.Map<CarDto, Car>(carDto);
+				return _unitOfWork.CarWriteRepository.Remove(result);
+			}
+			catch (Exception ex)
+			{
 
-		public Task<bool> RemoveAsync(int id)
-		{
-			throw new NotImplementedException();
-		}
+				throw new ApplicationException("Araba silinirken bir hata oluştu.", ex);
 
-		public int Update(CarDto carDto)
+			}
+		}
+		public async Task<bool> RemoveAsync(int id)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return await _unitOfWork.CarWriteRepository.RemoveAsync(id);
+			}
+			catch (Exception ex)
+			{
+
+				throw new ApplicationException("Araba silinirken bir hata oluştu.", ex);
+			}
+		}
+		public bool Update(CarDto carDto)
+		{
+			try
+			{
+				var result = _mapper.Map<CarDto,Car>(carDto);
+				return _unitOfWork.CarWriteRepository.Update(result);
+			}
+			catch (Exception ex)
+			{
+
+				throw new ApplicationException("Araba güncellenirken bir hata oluştu.", ex);
+
+			}
 		}
 	}
 }

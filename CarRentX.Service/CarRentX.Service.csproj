@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CarRentX.DTO\CarRentX.DTO.csproj" />
     <ProjectReference Include="..\CarRentX.Mapping\CarRentX.Mapping.csproj" />
-    <ProjectReference Include="..\CarRentX.Repository\CarRentX.Repository.csproj" />
     <ProjectReference Include="..\CarRentX.UnitOfWork\CarRentX.UnitOfWork.csproj" />
     <ProjectReference Include="..\CarRentX.Utility\CarRentX.Utility.csproj" />
   </ItemGroup>

@@ -2,7 +2,6 @@
 using CarRentX.Repository.Abstact;
 using CarRentX.Repository.Concrete;
 using CarRentX.UnitOfWork.Abstract;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CarRentX.UnitOfWork.Concrete

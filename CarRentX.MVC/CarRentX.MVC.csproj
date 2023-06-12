@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarRentX.Manager\CarRentX.Manager.csproj" />
+  </ItemGroup>
+
 </Project>

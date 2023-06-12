@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.5.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarRentX.Service\CarRentX.Service.csproj" />
-    <ProjectReference Include="..\CarRentX.Utility\CarRentX.Utility.csproj" />
-    <ProjectReference Include="..\CarRentX.Validation\CarRentX.Validation.csproj" />
     <ProjectReference Include="..\CarRentX.ViewModel\CarRentX.ViewModel.csproj" />
   </ItemGroup>
 

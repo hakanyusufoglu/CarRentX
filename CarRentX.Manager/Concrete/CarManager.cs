@@ -1,9 +1,11 @@
 ﻿using CarRentX.DTO.Car;
+using CarRentX.Entity.Concrete;
 using CarRentX.Manager.Abstact;
 using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
 using CarRentX.Utility.BaseResponse;
 using CarRentX.ViewModel.Car;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 
 namespace CarRentX.Manager.Concrete
@@ -11,24 +13,30 @@ namespace CarRentX.Manager.Concrete
 	public class CarManager : ICarManager
 	{
 		private readonly ICarService _carService;
+		private readonly IValidator<CarViewModel> _validator;
 		private readonly IConfiguration _config;
 		private readonly IMapping _mapper;
 
-		public CarManager(ICarService carService, IMapping mapper, IConfiguration config)
+		public CarManager(ICarService carService, IMapping mapper, IConfiguration config, IValidator<CarViewModel> validator)
 		{
 			_carService = carService;
 			_mapper = mapper;
 			_config = config;
+			_validator = validator;
 		}
 		public async Task<BaseResponse<int>> AddAsync(CarViewModel carViewModel)
 		{
 			try
 			{
+				var validationResult = _validator.Validate(carViewModel);
+				
+				if (!validationResult.IsValid) return BaseResponse<int>.Error(string.Join(" ", validationResult.Errors.Select(error => error.ErrorMessage)));
+
 				var carDto = _mapper.Map<CarViewModel, CarDto>(carViewModel);
 				var result = await _carService.AddAsync(carDto);
 				if (result <= 0)
 				{
-					return BaseResponse<int>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value??string.Empty);
+					return BaseResponse<int>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty);
 				}
 				return BaseResponse<int>.Success(carDto.Id, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Success").Value ?? string.Empty);
 			}

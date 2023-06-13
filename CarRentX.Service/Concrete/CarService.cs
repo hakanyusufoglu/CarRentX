@@ -13,9 +13,9 @@ namespace CarRentX.Service.Concrete
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IConfiguration _config;
 		private readonly IMapping _mapper;
-		public CarService(IUnitOfWork carUnitOfWork, IMapping mapper, IConfiguration config)
+		public CarService(IUnitOfWork unitOfWork, IMapping mapper, IConfiguration config)
 		{
-			_unitOfWork = carUnitOfWork;
+			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_config = config;
 		}

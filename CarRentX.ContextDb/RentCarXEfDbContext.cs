@@ -1,9 +1,11 @@
-﻿using CarRentX.Entity.Concrete;
+﻿using CarRentX.ContextDb.Configuration;
+using CarRentX.Entity.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentX.ContextDb
 {
-	public class RentCarXEfDbContext:DbContext
+	public class RentCarXEfDbContext:IdentityDbContext<AppUser,AppRole,string>
 	{
 		public RentCarXEfDbContext(DbContextOptions options):base(options)
 		{
@@ -12,5 +14,12 @@ namespace CarRentX.ContextDb
 		public virtual DbSet<Car> Cars { get; set; }
 		public virtual DbSet<Brand> Brands { get; set; }
 		public virtual DbSet<Color> Colors { get; set; }
+		public virtual DbSet<Customer> Customers { get; set; }
+		public virtual DbSet<Rental> Rentals { get; set; }
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			builder.ApplyConfiguration(new BrandConfiguration());
+			base.OnModelCreating(builder);
+		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using CarRentX.DTO.Car;
+using CarRentX.Entity.Concrete;
 
 namespace CarRentX.Service.Abstract
 {
@@ -10,5 +11,6 @@ namespace CarRentX.Service.Abstract
 		Task<bool> RemoveAsync(int id);
 		bool Update(CarDto carDto);
 		bool Remove(CarDto carDto);
+		Task<IEnumerable<CarDto>> GetAllWithBrandColorAsync();
 	}
 }

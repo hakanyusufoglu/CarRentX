@@ -1,4 +1,5 @@
-﻿using CarRentX.Utility.BaseResponse;
+﻿using CarRentX.DTO.Car;
+using CarRentX.Utility.BaseResponse;
 using CarRentX.ViewModel.Car;
 
 namespace CarRentX.Manager.Abstact
@@ -11,5 +12,6 @@ namespace CarRentX.Manager.Abstact
 		Task<BaseResponse<bool>> RemoveAsync(int id);
 		BaseResponse<bool> Update(CarViewModel carViewModel);
 		BaseResponse<bool> Remove(CarViewModel carViewModel);
+		Task<BaseResponse<IEnumerable<CarViewModel>>> GetAllWithBrandColorAsync();
 	}
 }

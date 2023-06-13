@@ -5,7 +5,7 @@ namespace CarRentX.Entity.Concrete
 	public class Car : BaseEntity<int>
 	{
 		public int BrandId { get; set; }
-		public string ColorId { get; set; }
+		public int ColorId { get; set; }
 		public string Name { get; set; }
 		public decimal DailyPrice { get; set; }
 		public DateTime ModelYear { get; set; }

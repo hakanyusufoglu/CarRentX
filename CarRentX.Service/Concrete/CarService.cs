@@ -62,6 +62,22 @@ namespace CarRentX.Service.Concrete
 				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Error").Value ?? string.Empty, ex);
 			}
 		}
+
+		public async Task<IEnumerable<CarDto>> GetAllWithBrandColorAsync()
+		{
+			_unitOfWork.BeginTransaction();
+			try
+			{
+				var result = await _unitOfWork.CarReadRepository.GetAllWithBrandColorAsync();
+				return _mapper.Map<IEnumerable<Car>, IEnumerable<CarDto>>(result);
+			}
+			catch (Exception ex)
+			{
+				_unitOfWork.Rollback();
+				throw new ApplicationException(_config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Error").Value ?? string.Empty, ex);
+			}
+		}
+
 		public async Task<CarDto> GetByIdAsync(int id)
 		{
 			_unitOfWork.BeginTransaction();

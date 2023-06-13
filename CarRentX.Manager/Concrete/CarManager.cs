@@ -71,6 +71,29 @@ namespace CarRentX.Manager.Concrete
 				return BaseResponse<IEnumerable<CarViewModel>>.Error(ex.Message);
 			}
 		}
+
+		public async Task<BaseResponse<IEnumerable<CarViewModel>>> GetAllWithBrandColorAsync()
+		{
+			try
+			{
+				var result = _mapper.Map<IEnumerable<CarDto>, IEnumerable<CarViewModel>>(await _carService.GetAllWithBrandColorAsync());
+				if (!result.Any())
+				{
+					return BaseResponse<IEnumerable<CarViewModel>>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Error").Value ?? string.Empty);
+				}
+				return BaseResponse<IEnumerable<CarViewModel>>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("GetAll").GetSection("Success").Value ?? string.Empty);
+			}
+			catch (Exception ex)
+			{
+				if (ex.InnerException != null)
+				{
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<IEnumerable<CarViewModel>>.Error(errorMessage);
+				}
+				return BaseResponse<IEnumerable<CarViewModel>>.Error(ex.Message);
+			}
+		}
+
 		public async Task<BaseResponse<CarViewModel>> GetByIdAsync(int id)
 		{
 			try

@@ -10,5 +10,7 @@ namespace CarRentX.ContextDb
 
 		}
 		public virtual DbSet<Car> Cars { get; set; }
+		public virtual DbSet<Brand> Brands { get; set; }
+		public virtual DbSet<Color> Colors { get; set; }
 	}
 }

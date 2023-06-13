@@ -42,17 +42,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<int>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-
-				return BaseResponse<int>.Error(errorMessage);
+				return BaseResponse<int>.Error(ex.Message);
 			}
 		}
 		public BaseResponse<IEnumerable<CarViewModel>> GetAll()
@@ -68,16 +63,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<IEnumerable<CarViewModel>>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-				return BaseResponse<IEnumerable<CarViewModel>>.Error(errorMessage);
+				return BaseResponse<IEnumerable<CarViewModel>>.Error(ex.Message);
 			}
 		}
 		public async Task<BaseResponse<CarViewModel>> GetByIdAsync(int id)
@@ -93,16 +84,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<CarViewModel>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-				return BaseResponse<CarViewModel>.Error(errorMessage);
+				return BaseResponse<CarViewModel>.Error(ex.Message);
 			}
 		}
 		public BaseResponse<bool> Remove(CarViewModel carViewModel)
@@ -119,16 +106,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<bool>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-				return BaseResponse<bool>.Error(errorMessage);
+				return BaseResponse<bool>.Error(ex.Message);
 			}
 		}
 		public async Task<BaseResponse<bool>> RemoveAsync(int id)
@@ -144,16 +127,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<bool>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-				return BaseResponse<bool>.Error(errorMessage);
+				return BaseResponse<bool>.Error(ex.Message);
 			}
 		}
 		public BaseResponse<bool> Update(CarViewModel carViewModel)
@@ -170,16 +149,12 @@ namespace CarRentX.Manager.Concrete
 			}
 			catch (Exception ex)
 			{
-				string errorMessage;
 				if (ex.InnerException != null)
 				{
-					errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					string errorMessage = $"Inner Exception Message: {ex.InnerException.Message}, Exception Message: {ex.Message}";
+					return BaseResponse<bool>.Error(errorMessage);
 				}
-				else
-				{
-					errorMessage = ex.Message;
-				}
-				return BaseResponse<bool>.Error(errorMessage);
+				return BaseResponse<bool>.Error(ex.Message);
 			}
 		}
 	}

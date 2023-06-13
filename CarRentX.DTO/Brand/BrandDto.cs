@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRentX.BaseEntity
+namespace CarRentX.DTO.Brand
 {
-	public class BaseEntity<T>
+	public class BrandDto
 	{
-		public T Id { get; set; }
+		public int Id { get; set; }
+		public string Name { get; set; }
 		public bool IsDeleted { get; set; }
-		public DateTime CreatedDateTime { get; set; }	
+		public DateTime CreatedDateTime { get; set; }
 	}
 }

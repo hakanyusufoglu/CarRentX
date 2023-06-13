@@ -1,8 +1,9 @@
-﻿namespace CarRentX.Entity.Concrete
+﻿using CarRentX.BaseEntity;
+
+namespace CarRentX.Entity.Concrete
 {
-	public class Brand
+	public class Brand:BaseEntity<int>
 	{
-		public int Id { get; set; }
 		public string Name { get; set; }
 		public virtual ICollection<Car> Cars { get; set; }
 	}

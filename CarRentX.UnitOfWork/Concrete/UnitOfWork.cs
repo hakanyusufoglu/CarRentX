@@ -13,7 +13,10 @@ namespace CarRentX.UnitOfWork.Concrete
 		private IDbContextTransaction _transaction;
 		private CarReadRepository _carReadRepository;
 		private CarWriteRepository _carWriteRepository;
-
+		private ColorReadRepository _colorReadRepository;
+		private ColorWriteRepository _colorWriteRepository;
+		private BrandReadRepository _brandReadRepository;
+		private BrandWriteRepository _brandWriteRepository;
 		public UnitOfWork(RentCarXEfDbContext context)
 		{
 			_context = context;
@@ -24,6 +27,18 @@ namespace CarRentX.UnitOfWork.Concrete
 
 		// CarWriteRepository'nin bir örneğini döndürür (Lazy initialization)
 		public ICarWriteRepository CarWriteRepository => _carWriteRepository = _carWriteRepository ?? new CarWriteRepository(_context);
+
+		// ColorReadRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IColorReadRepository ColorReadRepository => _colorReadRepository = _colorReadRepository ?? new ColorReadRepository(_context);
+
+		// ColorWriteRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IColorWriteRepository ColorWriteRepository => _colorWriteRepository = _colorWriteRepository ?? new ColorWriteRepository(_context);
+
+		// BrandReadRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IBrandReadRepository BrandReadRepository => _brandReadRepository = _brandReadRepository ?? new BrandReadRepository(_context);
+
+		// BrandWriteRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IBrandWriteRepository BrandWriteRepository => _brandWriteRepository = _brandWriteRepository ?? new BrandWriteRepository(_context);
 
 		// Değişiklikleri veritabanına kaydeder ve kaydedilen değişiklik sayısını döndürür (Asenkron)
 		public async Task<int> CommitAsync()

@@ -1,6 +1,6 @@
-﻿namespace CarRentX.DTO.Customer
+﻿namespace CarRentX.ViewModel.Customer
 {
-	public class CustomerDto
+	public class CustomerViewModel
 	{
 		public int Id { get; set; }
 		public string Address { get; set; }

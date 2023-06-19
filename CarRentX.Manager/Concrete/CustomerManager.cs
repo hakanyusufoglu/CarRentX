@@ -1,11 +1,8 @@
-﻿using CarRentX.DTO.Car;
-using CarRentX.DTO.Customer;
+﻿using CarRentX.DTO.Customer;
 using CarRentX.Manager.Abstact;
 using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
-using CarRentX.Service.Concrete;
 using CarRentX.Utility.BaseResponse;
-using CarRentX.ViewModel.Car;
 using CarRentX.ViewModel.Customer;
 using Microsoft.Extensions.Configuration;
 

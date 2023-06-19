@@ -24,6 +24,18 @@ namespace CarRentX.Manager
 			services.AddScoped<IMapping, CarRentX.Mapping.Concrete.Mapster>();
 			services.AddScoped<ICarService, CarService>();
 			services.AddScoped<ICarManager, CarManager>();
+
+			services.AddScoped<ICustomerService, CustomerService>();
+			services.AddScoped<ICustomerManager, CustomerManager>();
+
+			services.AddScoped<IBrandService, BrandService>();
+			services.AddScoped<IBrandManager, BrandManager>();
+
+			services.AddScoped<IColorService, ColorService>();
+			services.AddScoped<IColorManager, ColorManager>();
+
+			services.AddScoped<IRentalService, RentalService>();
+			services.AddScoped<IRentalManager, RentalManager>();
 			services.AddTransient<IValidator<CarViewModel>, CarViewModelValidator>();
 			return services;
 		}

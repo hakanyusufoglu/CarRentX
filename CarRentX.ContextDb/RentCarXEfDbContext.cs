@@ -19,6 +19,7 @@ namespace CarRentX.ContextDb
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfiguration(new BrandConfiguration());
+			builder.ApplyConfiguration(new CarConfiguration());
 			base.OnModelCreating(builder);
 		}
 	}

@@ -8,6 +8,6 @@ namespace CarRentX.Entity.Concrete
 		public string LastName { get; set; }
 		public DateTime CreatedDateTime { get; set; } = DateTime.Now;
 		public DateTime? LastModifiedDate { get; set; }
-		public Customer Customer { get; set; }
+		public virtual ICollection<Customer> Customers { get; set; }
 	}
 }

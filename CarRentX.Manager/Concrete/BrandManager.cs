@@ -35,7 +35,7 @@ namespace CarRentX.Manager.Concrete
 				{
 					return BaseResponse<int>.Error(_config.GetSection("StaticMessages").GetSection("Brand").GetSection("Add").GetSection("Error").Value ?? string.Empty);
 				}
-				return BaseResponse<int>.Success(brandDto.Id, _config.GetSection("StaticMessages").GetSection("Brand").GetSection("Add").GetSection("Success").Value ?? string.Empty);
+				return BaseResponse<int>.Success(result, _config.GetSection("StaticMessages").GetSection("Brand").GetSection("Add").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{

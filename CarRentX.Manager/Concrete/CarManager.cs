@@ -1,9 +1,11 @@
-﻿using CarRentX.DTO.Car;
+﻿using CarRentX.Aspect.Validation;
+using CarRentX.DTO.Car;
 using CarRentX.Entity.Concrete;
 using CarRentX.Manager.Abstact;
 using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
 using CarRentX.Utility.BaseResponse;
+using CarRentX.Validation.Car;
 using CarRentX.ViewModel.Car;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +26,14 @@ namespace CarRentX.Manager.Concrete
 			_config = config;
 			_validator = validator;
 		}
+		[ValidationAspect(typeof(CarViewModelValidator))]
 		public async Task<BaseResponse<int>> AddAsync(CarViewModel carViewModel)
 		{
 			try
 			{
-				var validationResult = _validator.Validate(carViewModel);
+				//var validationResult = _validator.Validate(carViewModel);
 				
-				if (!validationResult.IsValid) return BaseResponse<int>.Error(string.Join(" ", validationResult.Errors.Select(error => error.ErrorMessage)));
+				//if (!validationResult.IsValid) return BaseResponse<int>.Error(string.Join(" ", validationResult.Errors.Select(error => error.ErrorMessage)));
 
 				var carDto = _mapper.Map<CarViewModel, CarDto>(carViewModel);
 				var result = await _carService.AddAsync(carDto);
@@ -38,7 +41,7 @@ namespace CarRentX.Manager.Concrete
 				{
 					return BaseResponse<int>.Error(_config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty);
 				}
-				return BaseResponse<int>.Success(carDto.Id, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Success").Value ?? string.Empty);
+				return BaseResponse<int>.Success(result, _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Success").Value ?? string.Empty);
 			}
 			catch (Exception ex)
 			{

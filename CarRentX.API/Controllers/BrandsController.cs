@@ -1,8 +1,5 @@
 ﻿using CarRentX.Manager.Abstact;
-using CarRentX.Manager.Concrete;
 using CarRentX.ViewModel;
-using CarRentX.ViewModel.Customer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentX.API.Controllers

@@ -43,7 +43,7 @@ namespace CarRentX.UnitOfWork.Concrete
 
 		// BrandWriteRepository'nin bir örneğini döndürür (Lazy initialization)
 		public IBrandWriteRepository BrandWriteRepository => _brandWriteRepository = _brandWriteRepository ?? new BrandWriteRepository(_context);
-		
+
 		// RentalReadRepository'nin bir örneğini döndürür (Lazy initialization)
 		public IRentalReadRepository RentalReadRepository => _rentalReadRepository = _rentalReadRepository ?? new RentalReadRepository(_context);
 
@@ -59,7 +59,11 @@ namespace CarRentX.UnitOfWork.Concrete
 		public async Task<int> CommitAsync()
 		{
 			var result = await _context.SaveChangesAsync(); // Yapılan değişiklikleri veritabanına kaydeder ve kaydedilen değişiklik sayısını döndürür (Asenkron)
-			await _transaction.CommitAsync(); // Transaction'ı commit eder (Asenkron)
+			if (_transaction != null)
+			{
+				await _transaction.CommitAsync(); // Transaction'ı commit eder (Non-Asenkron)
+				_transaction.Dispose();
+			}
 			return result;
 		}
 
@@ -67,34 +71,53 @@ namespace CarRentX.UnitOfWork.Concrete
 		public int Commit()
 		{
 			var result = _context.SaveChanges(); // Yapılan değişiklikleri veritabanına kaydeder ve kaydedilen değişiklik sayısını döndürür (Non-Asenkron)
-			_transaction.Commit(); // Transaction'ı commit eder (Non-Asenkron)
+			if (_transaction != null)
+			{
+				_transaction.Commit(); // Transaction'ı commit eder (Non-Asenkron)
+				_transaction.Dispose();
+			}
 			return result;
 		}
 
 		// Yeni bir transaction başlatır (Asenkron)
 		public async Task BeginTransactionAsync()
 		{
+			if (_transaction != null)
+			{
+				_transaction.Dispose();
+			}
 			_transaction = await _context.Database.BeginTransactionAsync(); // Yeni bir transaction başlatır (Asenkron)
 		}
 
 		// Yeni bir transaction başlatır (Non-Asenkron)
 		public void BeginTransaction()
 		{
+			if (_transaction != null)
+			{
+				_transaction.Dispose();
+			}
 			_transaction = _context.Database.BeginTransaction(); // Yeni bir transaction başlatır (Non-Asenkron)
 		}
 
 		// Transaction'ı rollback eder (Asenkron)
 		public async Task RollbackAsync()
 		{
+			if (_transaction != null)
+			{
+				_transaction?.Dispose();
+			}
 			await _transaction.RollbackAsync(); // Transaction'ı rollback eder (Asenkron)
 		}
 
 		// Transaction'ı rollback eder (Non-Asenkron)
 		public void Rollback()
 		{
-			_transaction.Rollback(); // Transaction'ı rollback eder (Non-Asenkron)
+			if (_transaction != null)
+			{
+				_transaction.Dispose();
+			}
+			_transaction?.Rollback(); // Transaction'ı rollback eder (Non-Asenkron)
 		}
-
 		// Kullanılan kaynakları serbest bırakır
 		public void Dispose()
 		{

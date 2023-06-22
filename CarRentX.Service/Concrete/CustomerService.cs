@@ -20,7 +20,7 @@ namespace CarRentX.Service.Concrete
 		}
 		public async Task<int> AddAsync(CustomerDto customerDto)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			if (customerDto == null)
 			{
 				throw new ArgumentNullException(nameof(customerDto), _config.GetSection("StaticMessages").GetSection("Customer").GetSection("Add").GetSection("Error").Value ?? string.Empty);
@@ -65,7 +65,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<CustomerDto> GetByIdAsync(int id)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
 				var result = await _unitOfWork.CustomerReadRepository.GetByIdAsync(id);
@@ -93,12 +93,12 @@ namespace CarRentX.Service.Concrete
 			}
 		}
 
-		public Task<bool> RemoveAsync(int id)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
-				return _unitOfWork.CustomerWriteRepository.RemoveAsync(id);
+				return await _unitOfWork.CustomerWriteRepository.RemoveAsync(id);
 			}
 			catch (Exception ex)
 			{

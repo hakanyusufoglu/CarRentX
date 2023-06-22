@@ -1,4 +1,5 @@
-
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using CarRentX.Manager;
 
 namespace CarRentX.API
@@ -8,10 +9,17 @@ namespace CarRentX.API
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-
-			// Add services to the container.
-			builder.Services.AddManagerServices(builder.Configuration);
-
+			//Add AutoFac
+			builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+				.ConfigureContainer<ContainerBuilder>(builder =>
+				{
+					// Add services to the container.
+					var configuration = new ConfigurationBuilder()
+						.SetBasePath(Directory.GetCurrentDirectory())
+						.AddJsonFile("appsettings.json")
+						.Build();
+					builder.RegisterModule(new AutofacBusinessModule(configuration));
+				});
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();

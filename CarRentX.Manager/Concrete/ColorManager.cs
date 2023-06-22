@@ -1,13 +1,9 @@
-﻿using CarRentX.DTO.Car;
-using CarRentX.DTO.Color;
+﻿using CarRentX.DTO.Color;
 using CarRentX.Manager.Abstact;
 using CarRentX.Mapping.Abstract;
 using CarRentX.Service.Abstract;
-using CarRentX.Service.Concrete;
 using CarRentX.Utility.BaseResponse;
 using CarRentX.ViewModel;
-using CarRentX.ViewModel.Car;
-using FluentValidation;
 using Microsoft.Extensions.Configuration;
 
 namespace CarRentX.Manager.Concrete

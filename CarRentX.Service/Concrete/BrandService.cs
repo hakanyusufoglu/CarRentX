@@ -13,15 +13,15 @@ namespace CarRentX.Service.Concrete
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IConfiguration _config;
 		private readonly IMapping _mapper;
-		public BrandService(IUnitOfWork carUnitOfWork, IMapping mapper, IConfiguration config)
+		public BrandService(IUnitOfWork unitOfWork, IMapping mapper, IConfiguration config)
 		{
-			_unitOfWork = carUnitOfWork;
+			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_config = config;
 		}
 		public async Task<int> AddAsync(BrandDto brandDto)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			if (brandDto == null)
 			{
 				throw new ArgumentNullException(nameof(brandDto), _config.GetSection("StaticMessages").GetSection("Brand").GetSection("Add").GetSection("Error").Value ?? string.Empty);
@@ -66,7 +66,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<BrandDto> GetByIdAsync(int id)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
 				var result = await _unitOfWork.BrandReadRepository.GetByIdAsync(id);

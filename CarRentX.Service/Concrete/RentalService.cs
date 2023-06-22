@@ -23,7 +23,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<int> AddAsync(RentalDto rentalDto)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			if (rentalDto == null)
 			{
 				throw new ArgumentNullException(nameof(rentalDto), _config.GetSection("StaticMessages").GetSection("Rental").GetSection("Add").GetSection("Error").Value ?? string.Empty);

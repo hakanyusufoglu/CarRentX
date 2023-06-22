@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarRentX.Aspect\CarRentX.Aspect.csproj" />
     <ProjectReference Include="..\CarRentX.ViewModel\CarRentX.ViewModel.csproj" />
   </ItemGroup>
 

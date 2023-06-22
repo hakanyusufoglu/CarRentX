@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.4.0" />
+    <PackageReference Include="Autofac" Version="7.0.1" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarRentX.Aspect\CarRentX.Aspect.csproj" />
     <ProjectReference Include="..\CarRentX.Service\CarRentX.Service.csproj" />
     <ProjectReference Include="..\CarRentX.Utility\CarRentX.Utility.csproj" />
     <ProjectReference Include="..\CarRentX.Validation\CarRentX.Validation.csproj" />

@@ -21,7 +21,7 @@ namespace CarRentX.Service.Concrete
 		}
 		public async Task<int> AddAsync(CarDto carDto)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			if (carDto == null)
 			{
 				throw new ArgumentNullException(nameof(carDto), _config.GetSection("StaticMessages").GetSection("Car").GetSection("Add").GetSection("Error").Value ?? string.Empty);
@@ -65,7 +65,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<IEnumerable<CarDto>> GetAllWithBrandColorAsync()
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
 				var result = await _unitOfWork.CarReadRepository.GetAllWithBrandColorAsync();
@@ -80,7 +80,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<CarDto> GetByIdAsync(int id)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
 				var result = await _unitOfWork.CarReadRepository.GetByIdAsync(id);

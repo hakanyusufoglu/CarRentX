@@ -20,7 +20,7 @@ namespace CarRentX.ContextDb
 		{
 			builder.ApplyConfiguration(new BrandConfiguration());
 			builder.ApplyConfiguration(new CarConfiguration());
-			base.OnModelCreating(builder);
+		base.OnModelCreating(builder);
 		}
 	}
 }

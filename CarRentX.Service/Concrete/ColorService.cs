@@ -20,7 +20,7 @@ namespace CarRentX.Service.Concrete
 		}
 		public async Task<int> AddAsync(ColorDto colorDto)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			if (colorDto == null)
 			{
 				throw new ArgumentNullException(nameof(colorDto), _config.GetSection("StaticMessages").GetSection("Color").GetSection("Add").GetSection("Error").Value ?? string.Empty);
@@ -65,7 +65,7 @@ namespace CarRentX.Service.Concrete
 
 		public async Task<ColorDto> GetByIdAsync(int id)
 		{
-			_unitOfWork.BeginTransaction();
+			await _unitOfWork.BeginTransactionAsync();
 			try
 			{
 				var result = await _unitOfWork.ColorReadRepository.GetByIdAsync(id);

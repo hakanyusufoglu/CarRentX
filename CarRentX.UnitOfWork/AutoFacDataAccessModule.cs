@@ -22,7 +22,6 @@ namespace CarRentX.UnitOfWork
 
 		protected override void Load(ContainerBuilder builder)
 		{
-
 			builder.Register(c =>
 			{
 				var optionsBuilder = new DbContextOptionsBuilder<RentCarXEfDbContext>();

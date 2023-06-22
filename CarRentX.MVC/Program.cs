@@ -8,7 +8,6 @@ namespace CarRentX.MVC
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-			builder.Services.AddManagerServices(builder.Configuration);
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
 

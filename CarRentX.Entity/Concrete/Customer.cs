@@ -7,7 +7,7 @@ namespace CarRentX.Entity.Concrete
 
 		public string Address { get;set; }
 		public string CompanyName { get; set; }
-		public AppUser AppUser { get; set; }
+		public UserApp AppUser { get; set; }
 		public virtual ICollection<Rental> Rentals { get; set; }
 	}
 }

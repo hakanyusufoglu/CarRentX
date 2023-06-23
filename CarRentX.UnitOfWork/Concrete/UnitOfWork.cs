@@ -21,6 +21,8 @@ namespace CarRentX.UnitOfWork.Concrete
 		private RentalWriteRepository _rentalWriteRepository;
 		private CustomerReadRepository _customerReadRepository;
 		private CustomerWriteRepository _customerWriteRepository;
+		private UserRefreshTokenReadRepository _userRefreshTokenReadRepository;
+		private UserRefreshTokenWriteRepository _userRefreshTokenWriteRepository;
 		public UnitOfWork(RentCarXEfDbContext context)
 		{
 			_context = context;
@@ -54,6 +56,12 @@ namespace CarRentX.UnitOfWork.Concrete
 
 		// CustomerWriteRepository'nin bir örneğini döndürür (Lazy initialization)
 		public ICustomerWriteRepository CustomerWriteRepository => _customerWriteRepository = _customerWriteRepository ?? new CustomerWriteRepository(_context);
+
+		// CustomerReadRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IUserRefreshTokenReadRepository UserRefreshTokenReadRepository => _userRefreshTokenReadRepository = _userRefreshTokenReadRepository ?? new UserRefreshTokenReadRepository(_context);
+
+		// CustomerWriteRepository'nin bir örneğini döndürür (Lazy initialization)
+		public IUserRefreshTokenWriteRepository UserRefreshTokenWriteRepository => _userRefreshTokenWriteRepository = _userRefreshTokenWriteRepository ?? new UserRefreshTokenWriteRepository(_context);
 
 		// Değişiklikleri veritabanına kaydeder ve kaydedilen değişiklik sayısını döndürür (Asenkron)
 		public async Task<int> CommitAsync()

@@ -4,6 +4,7 @@ using CarRentX.ContextDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentX.ContextDb.Migrations
 {
     [DbContext(typeof(RentCarXEfDbContext))]
-    partial class RentCarXEfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230623131459_aded_table_UserRefreshTokens")]
+    partial class aded_table_UserRefreshTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

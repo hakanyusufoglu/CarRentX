@@ -10,15 +10,20 @@ using CarRentX.Service.Concrete;
 using CarRentX.UnitOfWork;
 using CarRentX.UnitOfWork.Abstract;
 using CarRentX.UnitOfWork.Concrete;
+using CarRentX.Utility.Security.Encryption;
+using CarRentX.Utility.Security.Jwt.Abstract;
+using CarRentX.Utility.Security.Jwt.Concrete;
 using CarRentX.Validation.Car;
 using CarRentX.ViewModel.Car;
 using Castle.DynamicProxy;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CarRentX.Manager
 {
-	public class AutofacBusinessModule:Module
+	public class AutofacBusinessModule : Module
 	{
 		private readonly IConfiguration _configuration;
 
@@ -29,7 +34,7 @@ namespace CarRentX.Manager
 
 		protected override void Load(ContainerBuilder builder)
 		{
-			
+
 			builder.RegisterModule(new AutofacDataAccessesModule(_configuration));
 			// DbContext'i kaydet
 
@@ -77,9 +82,22 @@ namespace CarRentX.Manager
 				.As<IRentalManager>()
 				.InstancePerLifetimeScope();
 
+			builder.RegisterType<AuthService>()
+			.As<IAuthService>()
+			.InstancePerLifetimeScope();
+
+			builder.RegisterType<AuthManager>()
+				.As<IAuthManager>()
+				.InstancePerLifetimeScope();
+
+			builder.RegisterType<TokenHelperService>()
+				.As<ITokenHelperService>()
+				.InstancePerLifetimeScope();
+
 			builder.RegisterType<CarViewModelValidator>()
 				.As<IValidator<CarViewModel>>()
 				.InstancePerLifetimeScope();
+
 
 			var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
@@ -88,6 +106,33 @@ namespace CarRentX.Manager
 				{
 					Selector = new AspectInterceptorSelector()
 				}).SingleInstance();
+
+			// TokenOptions'ı kaynak olarak kaydedin
+			builder.RegisterInstance(_configuration.GetSection("TokenOptions").Get<TokenOptions>())
+				.SingleInstance();
+
+			// JWTBearerAuthentication ekleyin
+			builder.Register(c =>
+			{
+				var tokenOptions = c.Resolve<TokenOptions>();
+				var options = new JwtBearerOptions
+				{
+					TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateAudience = true,
+						ValidateLifetime = true,
+						ValidIssuer = tokenOptions.Issuer,
+						ValidAudience = tokenOptions.Audience[0],
+						ValidateIssuerSigningKey = true,
+						IssuerSigningKey = SecurityKeyHelper.GetSymmetricSecurityKey(tokenOptions.SecurityKey)
+					}
+				};
+
+				return options;
+			})
+				.AsSelf()
+				.SingleInstance();
 
 		}
 	}

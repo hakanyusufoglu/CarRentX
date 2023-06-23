@@ -2,7 +2,7 @@
 
 namespace CarRentX.Entity.Concrete
 {
-	public class AppUser:IdentityUser
+	public class UserApp:IdentityUser
 	{
 		public string FirstName { get; set; }
 		public string LastName { get; set; }

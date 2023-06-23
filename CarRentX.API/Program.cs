@@ -1,6 +1,11 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using CarRentX.ContextDb;
+using CarRentX.Entity.Concrete;
 using CarRentX.Manager;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CarRentX.API
 {
@@ -9,6 +14,12 @@ namespace CarRentX.API
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			builder.Services.AddIdentity<UserApp, IdentityRole>(options => {
+				options.User.RequireUniqueEmail = true;
+				options.Password.RequireNonAlphanumeric = false;
+			}).AddEntityFrameworkStores<RentCarXEfDbContext>().AddDefaultTokenProviders();
+
 			//Add AutoFac
 			builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 				.ConfigureContainer<ContainerBuilder>(builder =>
@@ -20,6 +31,7 @@ namespace CarRentX.API
 						.Build();
 					builder.RegisterModule(new AutofacBusinessModule(configuration));
 				});
+	
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();

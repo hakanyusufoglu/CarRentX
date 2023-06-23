@@ -15,6 +15,8 @@ namespace CarRentX.UnitOfWork.Abstract
 		IRentalWriteRepository RentalWriteRepository { get; }
 		ICustomerReadRepository CustomerReadRepository { get; }
 		ICustomerWriteRepository CustomerWriteRepository { get; }
+		IUserRefreshTokenReadRepository UserRefreshTokenReadRepository { get; }
+		IUserRefreshTokenWriteRepository UserRefreshTokenWriteRepository { get; }
 		Task<int> CommitAsync();
 		int Commit();
 		void BeginTransaction();

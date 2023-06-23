@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using CarRentX.BaseRepository.Abstract;
 using CarRentX.Entity.Concrete;
+using Microsoft.AspNetCore.Identity;
 
 namespace CarRentX.UnitOfWork
 {
@@ -19,7 +20,6 @@ namespace CarRentX.UnitOfWork
 		{
 			_configuration = configuration;
 		}
-
 		protected override void Load(ContainerBuilder builder)
 		{
 			builder.Register(c =>
@@ -82,6 +82,14 @@ namespace CarRentX.UnitOfWork
 
 			builder.RegisterType<CustomerWriteRepository>()
 				.As<ICustomerWriteRepository>()
+				.InstancePerLifetimeScope();
+
+			builder.RegisterType<UserRefreshTokenReadRepository>()
+				.As<IUserRefreshTokenReadRepository>()
+				.InstancePerLifetimeScope();
+
+			builder.RegisterType<UserRefreshTokenWriteRepository>()
+				.As<IUserRefreshTokenWriteRepository>()
 				.InstancePerLifetimeScope();
 		}
 	}

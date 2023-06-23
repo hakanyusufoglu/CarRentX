@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarRentX.ContextDb
 {
-	public class RentCarXEfDbContext:IdentityDbContext<AppUser,AppRole,string>
+	public class RentCarXEfDbContext:IdentityDbContext<UserApp,RoleApp,string>
 	{
 		public RentCarXEfDbContext(DbContextOptions options):base(options)
 		{
@@ -16,6 +16,7 @@ namespace CarRentX.ContextDb
 		public virtual DbSet<Color> Colors { get; set; }
 		public virtual DbSet<Customer> Customers { get; set; }
 		public virtual DbSet<Rental> Rentals { get; set; }
+		public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfiguration(new BrandConfiguration());
